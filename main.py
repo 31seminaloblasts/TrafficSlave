@@ -1,5 +1,9 @@
 import openrouteservice
-client = openrouteservice.Client(key='') # put your own key here
+import points
+
+location_points = points.locations() # enter location csv file path
+population_points = points.population() # enter population csv file path
+client = openrouteservice.Client(key='') # enter api key here
 
 def d(start, end):
     try:
@@ -16,12 +20,6 @@ def calculate():
                 data.append((duration, ii))
             data.sort()
             location_points[ii]["customers"] += population_points[i]["population"]
-population_points = [
-    {"coordinates": (0, 0), "population": 0},
-    {"coordinates": (0, 0), "population": 0},
-]
-location_points = [
-    {"coordinates": (0, 0), "customers": 0},
-    {"coordinates": (0, 0), "customers": 0},
-]
+            
 calculate()
+
